@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>box assignment</title>
+<style>
+#box{
+    width: 100px;height: 100px;background-color: burlywood;
+    position: absolute;left: 100px;top:100px;
+}
+</style>
+<script>
+let box;
+function init(){
+    box=document.getElementById("box");
+    box.addEventListener("mousedown",pickup);
+}
+function pickup(){
+    document.addEventListener("mousemove",move);
+    box.removeEventListener("mousedown",pickup);
+    box.addEventListener("mouseup",putdown);
+}
+function move(e){
+    console.log(e.clientX,e.clientY);
+    box.style.left=(e.clientX-20)+"px";
+    box.style.top=(e.clientY-20)+"px";
+    
+}
+function putdown(){
+    document.removeEventListener("mousemove",move);
+    box.addEventListener("mousedown",pickup);
+    //box.removeEventListener("mouseup",putdown); 因為mousedown&mouseup 直接構成click 所以不用這一行
+}
+</script>
+</head>
+<body onload="init();">
+    <div id="box"></div>
+
+</body>
+</html>

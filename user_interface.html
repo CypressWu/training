@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>City Pupulation</title>
+<meta charset="utf-8"/>
+<style>
+body{
+    background-color: antiquewhite;
+}
+</style>
+<script>
+function getData(){
+    let name=document.getElementById("name").value;
+    //使用AJAX/XHR 技術發送連線
+    let req=new XMLHttpRequest();
+    req.open("get","http://localhost:8080/city.php?name="+name);//get,post是最常用的連線
+//  req.open(連線方法,連線網址)//準備連線資訊
+    //註冊load事件，連線完成後觸發
+    req.addEventListener("load",function(){
+        console.log(req.responseText);
+        let result=document.getElementById("result");
+        result.innerHTML=req.responseText;
+    });
+    req.send(); //真正送出連線
+}
+</script>
+</head>
+<body>
+<h3>City population</h3>
+<div>
+    <input type="text" id="name" oninput="getData();"/>
+    <input type="button" value="Search" onclick="getData();" />
+</div>
+<div id="result"></div>
+    
+
+<!--
+<form action="http://localhost:8080/city.php">
+    <input type="text" name="name"/>
+    <input type="submit" value="Search" />
+    <!--form表單搭配submit按鈕會自動執行action
+</form>
+<hr/>
+<h3>Peng's training.pada-x.com</h3>
+choose your class
+<form action="https://training.pada-x.com/">
+    <select name="name" id="">
+        <option>javascript-start.htm</option>
+        <option>javascript-advanced.htm</option>
+        <option>javascript-practical.htm</option>
+        <option>html-css-rwd-layout.htm</option>                <option>javascript-practical.htm</option>
+        <option>google-analytics.htm</option>                <option>javascript-practical.htm</option>
+        <option>node-js.htm</option>
+    </select>
+    <input type="submit" value="Go!" />
+    <!--form表單搭配submit按鈕會自動執行action
+</form>
+-->
+
+
+</body>
+</html>
